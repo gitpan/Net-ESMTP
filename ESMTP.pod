@@ -212,7 +212,7 @@ B<Returns>: The current application data.
 
 =back
 
-=head2 MIME::ESMTP::Session
+=head2 Net::ESMTP::Session
 
 =over 4
 
@@ -221,20 +221,20 @@ B<Returns>: The current application data.
 Create session object. The first call you need to make before message creation
 and sending.
 
-B<Returns>: New MIME::ESMTP::Session object or undef on failure.
+B<Returns>: New Net::ESMTP::Session object or undef on failure.
 
 =item I<add_message> ()
 
 Add a message to the list of messages to be transferred to the remote
 MTA during an SMTP session.
 
-B<Returns>: New MIME::ESMTP::Message object or undef on failure.
+B<Returns>: New Net::ESMTP::Message object or undef on failure.
 
 =item I<enumerate_messages> (function[, data])
 
 Call the callback function once for each message in an smtp session.
 You can submit optional $data variable. For each message the callback function would
-see two arguments: MIME::ESMTP::Message object, $data from the user.
+see two arguments: Net::ESMTP::Message object, $data from the user.
 
 B<Returns>: Zero on failure, non-zero on success.
 
@@ -388,9 +388,9 @@ libESMTP will use the event callback to notify the application.
 =item I<etrn_add_node> (option, node)
 
 Add an ETRN node to the SMTP session.
-For further STRN usage see MIME::ESMTP::EtrnNode public class description below.
+For further STRN usage see Net::ESMTP::EtrnNode public class description below.
 
-B<Returns>: New MIME::ESMTP::EtrnNode object or undef on failure.
+B<Returns>: New Net::ESMTP::EtrnNode object or undef on failure.
 
 =back
 
@@ -454,10 +454,10 @@ B<NOTE>: not tested yet.
 
 =back
 
-=head2 MIME::ESMTP::Message
+=head2 Net::ESMTP::Message
 
-To create MIME::ESMTP::Message object one need to call
-add_message() method on the MIME::ESMTP::Session object.
+To create Net::ESMTP::Message object one need to call
+add_message() method on the Net::ESMTP::Session object.
 
 =over 4
 
@@ -778,10 +778,10 @@ B<Returns>: Non zero on success, zero on failure.
 
 =back
 
-=head2 MIME::ESMTP::Recipient
+=head2 Net::ESMTP::Recipient
 
-To create MIME::ESMTP::Recipient object one need to
-call add_recipient() method on the MIME::ESMTP::Message object.
+To create Net::ESMTP::Recipient object one need to
+call add_recipient() method on the Net::ESMTP::Message object.
 
 =over 4
 
@@ -848,10 +848,10 @@ B<Returns>: Non zero on success, zero on failure.
 
 =back
 
-=head2 MIME::ESMTP::EtrnNode
+=head2 Net::ESMTP::EtrnNode
 
-To create MIME::ESMTP::EtrnNode object one need to call
-etrn_add_node() method on the MIME::ESMTP::Session object.
+To create Net::ESMTP::EtrnNode object one need to call
+etrn_add_node() method on the Net::ESMTP::Session object.
 
 =over 4
 
@@ -874,14 +874,14 @@ if no status information is available.
 
 =back
 
-=head2 MIME::ESMTP::Auth
+=head2 Net::ESMTP::Auth
 
 A separate authentication context must be created for each SMTP session.
 Context is obtained from the SASL (RFC 2222) client
 library API defined ini F<auth-client.h> - it is compiled into
 Net::ESMTP by default.
 
-To connect MIME::ESMTP::Auth object to SMTP session use auth_set_context()
+To connect Net::ESMTP::Auth object to SMTP session use auth_set_context()
 method on the Net::ESMTP::Session object.
 
 =over 4

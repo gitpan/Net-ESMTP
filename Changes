@@ -1,5 +1,9 @@
 Revision history for Perl extension ESMTP.
 
+0.0.1 Thu Dec 14 16:46:00 2004
+    - release version 0.2.1
+    - fix documentation spell mistakes (thanks to Sergey Skvortsov)
+
 0.02  Sun Jan 25 22:15:00 2003
     - release version 0.02
     - update Makefile.PL when libs contain -pthread argument

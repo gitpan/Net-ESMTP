@@ -189,7 +189,7 @@ our @EXPORT = qw(
   Timeout_OVERRIDE_RFC2822_MINIMUM
 );
 
-our $VERSION = '0.2';
+our $VERSION = '0.2.1';
 
 sub AUTOLOAD {
     # This AUTOLOAD is used to 'autoload' constants from the constant()
