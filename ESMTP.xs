@@ -161,6 +161,13 @@ callback_eventcb (smtp_session_t session, int event_no, void *arg, ...)
 	case SMTP_EV_WRONG_PEER_CERTIFICATE:	/* int &ok */
 	    intptr = va_arg (ap, int *);
 	    break;
+	case SMTP_EV_NO_CLIENT_CERTIFICATE:	/* int &ok */
+	    intptr = va_arg (ap, int *);
+	    break;
+	case SMTP_EV_UNUSABLE_CLIENT_CERTIFICATE:	/* <empty arg list> */
+	    break;
+	case SMTP_EV_UNUSABLE_CA_LIST:	/* <empty arg list> */
+	    break;
     }
     va_end (ap);
 
@@ -1072,10 +1079,11 @@ smtp_strerror (error)
 	int				error
     PREINIT:
 	char				buf[256];
+    char                *ret;
     CODE:
-	if (!smtp_strerror (error, buf, 255))
+	if ((ret = smtp_strerror (error, buf, 255)) == NULL)
 	    XSRETURN_UNDEF;
-	RETVAL = newSVpv (buf, 0);
+	RETVAL = newSVpv (ret, 0);
     OUTPUT:
 	RETVAL
 

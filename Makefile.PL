@@ -6,6 +6,12 @@ use ExtUtils::MakeMaker;
 my $define = '-DUSE_SMTPAUTH'; # disable if you do not need/have auth-client.h
 my $libs   = `libesmtp-config --libs`;
 chomp($libs);
+my $otherldflags = " " . $libs;
+$otherldflags =~ s/ \-[lLR]\S+//g;
+$otherldflags =~ s/ \/\S+//g;
+$otherldflags =~ s/  / /g;
+$otherldflags =~ s/ +$//g;
+$otherldflags =~ s/^ +//g;
 my $incs   = `libesmtp-config --cflags`;
 chomp($incs);
 my $USE_OPENSSL = 1; # set to 0 if you do not have openssl installed
@@ -41,6 +47,7 @@ if ($USE_OPENSSL) {
     }
 }
 
+
 WriteMakefile(
     'NAME'		=> 'Net::ESMTP',
     'VERSION_FROM'	=> 'ESMTP.pm', # finds $VERSION
@@ -49,6 +56,7 @@ WriteMakefile(
       (ABSTRACT_FROM => 'ESMTP.pod', # retrieve abstract from module
        AUTHOR     => 'Piotr Klaban <post@klaban.torun.pl>') : ()),
     'LIBS'		=> [$libs], # e.g., '-lm'
+    'dynamic_lib' => { 'OTHERLDFLAGS' => $otherldflags },
     # 'OPTIMIZE'          => '-O',
     # 'CCFLAGS'           => '-g -ggdb -Wall',
     'DEFINE'		=> $define,
@@ -93,6 +101,7 @@ if  (eval {require ExtUtils::Constant; 1}) {
   SMTP_EV_EXTNA_8BITMIME SMTP_EV_EXTNA_STARTTLS SMTP_EV_EXTNA_ETRN SMTP_EV_EXTNA_CHUNKING
   SMTP_EV_EXTNA_BINARYMIME SMTP_EV_DELIVERBY_EXPIRED SMTP_EV_WEAK_CIPHER SMTP_EV_STARTTLS_OK
   SMTP_EV_INVALID_PEER_CERTIFICATE SMTP_EV_NO_PEER_CERTIFICATE SMTP_EV_WRONG_PEER_CERTIFICATE
+  SMTP_EV_NO_CLIENT_CERTIFICATE SMTP_EV_UNUSABLE_CLIENT_CERTIFICATE SMTP_EV_UNUSABLE_CA_LIST
   Starttls_DISABLED Starttls_ENABLED Starttls_REQUIRED
   Timeout_GREETING Timeout_ENVELOPE Timeout_DATA Timeout_TRANSFER Timeout_DATA2
      );

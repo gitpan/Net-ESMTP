@@ -115,7 +115,7 @@ for (@ARGV) {
 #
 if (!$session->start_session ()) {
     warn "SMTP server problem: " .
-	smtp_strerror (smtp_errno ());
+	smtp_strerror (smtp_errno ()) . "\n";
 } else {
     my $status = $message->message_transfer_status();
     print $status->{'code'} . ' ' . $status->{'text'};

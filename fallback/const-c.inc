@@ -28,15 +28,15 @@ constant_9 (pTHX_ const char *name, IV *iv_return) {
   /* Offset 8 gives the best switch position.  */
   switch (name[8]) {
   case 'N':
-    if (memEQ(name, "By_RETURN", 9)) {
-    /*                       ^      */
+    if (memEQ(name, "By_RETUR", 8)) {
+    /*                       N     */
       *iv_return = By_RETURN;
       return PERL_constant_ISIV;
     }
     break;
   case 'R':
-    if (memEQ(name, "AUTH_USER", 9)) {
-    /*                       ^      */
+    if (memEQ(name, "AUTH_USE", 8)) {
+    /*                       R     */
 #if defined(_auth_client_h)
       *iv_return = AUTH_USER;
       return PERL_constant_ISIV;
@@ -46,8 +46,8 @@ constant_9 (pTHX_ const char *name, IV *iv_return) {
     }
     break;
   case 'S':
-    if (memEQ(name, "AUTH_PASS", 9)) {
-    /*                       ^      */
+    if (memEQ(name, "AUTH_PAS", 8)) {
+    /*                       S     */
 #if defined(_auth_client_h)
       *iv_return = AUTH_PASS;
       return PERL_constant_ISIV;
@@ -57,15 +57,15 @@ constant_9 (pTHX_ const char *name, IV *iv_return) {
     }
     break;
   case 'T':
-    if (memEQ(name, "By_NOTSET", 9)) {
-    /*                       ^      */
+    if (memEQ(name, "By_NOTSE", 8)) {
+    /*                       T     */
       *iv_return = By_NOTSET;
       return PERL_constant_ISIV;
     }
     break;
   case 'Y':
-    if (memEQ(name, "By_NOTIFY", 9)) {
-    /*                       ^      */
+    if (memEQ(name, "By_NOTIF", 8)) {
+    /*                       Y     */
       *iv_return = By_NOTIFY;
       return PERL_constant_ISIV;
     }
@@ -638,6 +638,43 @@ constant_22 (pTHX_ const char *name, IV *iv_return) {
 }
 
 static int
+constant_24 (pTHX_ const char *name, IV *iv_return) {
+  /* When generated this function returned values for the list of names given
+     here.  However, subsequent manual editing may have added or removed some.
+     SMTP_ERR_STATUS_MISMATCH SMTP_EV_EXTNA_BINARYMIME SMTP_EV_UNUSABLE_CA_LIST
+     */
+  /* Offset 17 gives the best switch position.  */
+  switch (name[17]) {
+  case 'A':
+    if (memEQ(name, "SMTP_EV_EXTNA_BINARYMIME", 24)) {
+    /*                                ^             */
+      *iv_return = SMTP_EV_EXTNA_BINARYMIME;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case 'C':
+    if (memEQ(name, "SMTP_EV_UNUSABLE_CA_LIST", 24)) {
+    /*                                ^             */
+      *iv_return = SMTP_EV_UNUSABLE_CA_LIST;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case 'I':
+    if (memEQ(name, "SMTP_ERR_STATUS_MISMATCH", 24)) {
+    /*                                ^             */
+#ifdef SMTP_ERR_STATUS_MISMATCH
+      *iv_return = SMTP_ERR_STATUS_MISMATCH;
+      return PERL_constant_ISIV;
+#else
+      return PERL_constant_NOTDEF;
+#endif
+    }
+    break;
+  }
+  return PERL_constant_NOTFOUND;
+}
+
+static int
 constant_32 (pTHX_ const char *name, IV *iv_return) {
   /* When generated this function returned values for the list of names given
      here.  However, subsequent manual editing may have added or removed some.
@@ -714,7 +751,7 @@ constant (pTHX_ const char *name, STRLEN len, IV *iv_return) {
      Regenerate these constant functions by feeding this entire source file to
      perl -x
 
-#!perl -w
+#!/usr/bin/perl -w
 use ExtUtils::Constant qw (constant_types C_constant XS_constant);
 
 my $types = {map {($_, 1)} qw(IV)};
@@ -767,9 +804,12 @@ my @names = (qw(SMTP_CB_HEADERS SMTP_CB_READING SMTP_CB_WRITING
             {name=>"SMTP_EV_MAILSTATUS", type=>"IV", macro=>"1"},
             {name=>"SMTP_EV_MESSAGEDATA", type=>"IV", macro=>"1"},
             {name=>"SMTP_EV_MESSAGESENT", type=>"IV", macro=>"1"},
+            {name=>"SMTP_EV_NO_CLIENT_CERTIFICATE", type=>"IV", macro=>"1"},
             {name=>"SMTP_EV_NO_PEER_CERTIFICATE", type=>"IV", macro=>"1"},
             {name=>"SMTP_EV_RCPTSTATUS", type=>"IV", macro=>"1"},
             {name=>"SMTP_EV_STARTTLS_OK", type=>"IV", macro=>"1"},
+            {name=>"SMTP_EV_UNUSABLE_CA_LIST", type=>"IV", macro=>"1"},
+            {name=>"SMTP_EV_UNUSABLE_CLIENT_CERTIFICATE", type=>"IV", macro=>"1"},
             {name=>"SMTP_EV_WEAK_CIPHER", type=>"IV", macro=>"1"},
             {name=>"SMTP_EV_WRONG_PEER_CERTIFICATE", type=>"IV", macro=>"1"},
             {name=>"Starttls_DISABLED", type=>"IV", macro=>"1"},
@@ -921,29 +961,7 @@ __END__
     }
     break;
   case 24:
-    /* Names all of length 24.  */
-    /* SMTP_ERR_STATUS_MISMATCH SMTP_EV_EXTNA_BINARYMIME */
-    /* Offset 16 gives the best switch position.  */
-    switch (name[16]) {
-    case 'M':
-      if (memEQ(name, "SMTP_ERR_STATUS_MISMATCH", 24)) {
-      /*                               ^              */
-#ifdef SMTP_ERR_STATUS_MISMATCH
-        *iv_return = SMTP_ERR_STATUS_MISMATCH;
-        return PERL_constant_ISIV;
-#else
-        return PERL_constant_NOTDEF;
-#endif
-      }
-      break;
-    case 'N':
-      if (memEQ(name, "SMTP_EV_EXTNA_BINARYMIME", 24)) {
-      /*                               ^              */
-        *iv_return = SMTP_EV_EXTNA_BINARYMIME;
-        return PERL_constant_ISIV;
-      }
-      break;
-    }
+    return constant_24 (aTHX_ name, iv_return);
     break;
   case 25:
     if (memEQ(name, "SMTP_EV_DELIVERBY_EXPIRED", 25)) {
@@ -976,6 +994,12 @@ __END__
       break;
     }
     break;
+  case 29:
+    if (memEQ(name, "SMTP_EV_NO_CLIENT_CERTIFICATE", 29)) {
+      *iv_return = SMTP_EV_NO_CLIENT_CERTIFICATE;
+      return PERL_constant_ISIV;
+    }
+    break;
   case 30:
     /* Names all of length 30.  */
     /* SMTP_ERR_UNTERMINATED_RESPONSE SMTP_EV_WRONG_PEER_CERTIFICATE */
@@ -1003,6 +1027,12 @@ __END__
     break;
   case 32:
     return constant_32 (aTHX_ name, iv_return);
+    break;
+  case 35:
+    if (memEQ(name, "SMTP_EV_UNUSABLE_CLIENT_CERTIFICATE", 35)) {
+      *iv_return = SMTP_EV_UNUSABLE_CLIENT_CERTIFICATE;
+      return PERL_constant_ISIV;
+    }
     break;
   }
   return PERL_constant_NOTFOUND;
