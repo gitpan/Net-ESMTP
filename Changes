@@ -1,0 +1,6 @@
+Revision history for Perl extension ESMTP.
+
+0.01  Wed Jun 18 20:29:30 2003
+	- original version; created by h2xs 1.22 with options
+		/usr/include/libesmtp.h --skip-ppport --name ESMTP -- -lesmtp
+
